@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <style>
+    h1, h4 {text-align:center;}
+    li {margin: 2px;}
+  </style>
+</head>
+
+<body>
+  <h1>Hardware Project</h1>
+  <h4>By: Praneeth Suryadevara</h4>
+  <h2>Scenario</h2>
+  <p>The user clicks on an item they want to purchase and the request gets sent to the application’s server.</p>
+  <h2>Instructions</h2>
+  <ol>
+    <li style = "font-weight: bold;">Mouse</li>
+      <ol type = "a">
+        <li>Clicking the mouse creates contact with the electrical components inside the mouse, sending a signal to the bus that data needs to be sent.</li>
+        <li>The mouse makes a data packet consisting of 3 to 5 bytes that are sent every time the mouse state changes, including being clicked; contains movement in X and Y axis since sending of last packet, and 1 or 0s indicating whether mouse buttons have been clicked.</li>
+      </ol>
+    <li style = "font-weight: bold;"><abbr title = "Universal Serial Bus">USB</abbr> Cable</li>
+      <ol type = "a">
+        <li>Assuming that this is a wired mouse, the mouse transmits the data through a cable that is attached to it and towards the computer. The cord will likely be a USB-A connector type.</li> 
+      </ol>
+    <li style = "font-weight: bold;"><b>Ports</b></li>
+      <ol type = "a">
+        <li>This data is then taken to a USB port inside the computer, which allows a cable to be plugged into them and transmit data. These are connected to the motherboard and allow connection to subsequent parts.</li>
+      </ol>
+    <li style = "font-weight: bold;">Motherboard</li>
+      <ol type = "a">
+        <li>The motherboard uses its built-in wires to transmit data to the southbridge where the USB input data can be processed.</li>
+      </ol>
+    <li style = "font-weight: bold;">Southbridge</li>
+      <ol type = "a">
+        <li>Also known as the <abbr title = "Input/Output">I/O</abbr> Controller Hub on Intel devices, this is the general station for handling input and output data. Here, an interrupt signal is also made to be sent to the <abbr title = "Central Processing Unit">CPU</abbr>, informing it to stop and process the mouse inputs.</li>
+      </ol>
+    <li style = "font-weight: bold;">Data Bus</li>
+      <ol type = "a">
+        <li>The data bus allows the information (including the interrupt) to be transmitted away from the southbridge using electrical wires so it can be received by other components on the motherboard.</li>
+      </ol>
+    <li style = "font-weight: bold;">Northbridge</li>
+      <ol type = "a">
+        <li>It is received in the northbridge, which is able to distribute it to other components on the motherboard. </li>
+      </ol>
+    <li style = "font-weight: bold;">Memory Slots</li>
+      <ol type = "a">
+        <li>The memory slots receive the data so it can be sent to the <abbr title = "Dynamic Random Access Memory">DRAM</abbr>.</li>
+      </ol>
+    <li style = "font-weight: bold;"><abbr title = "Random Access Memory">RAM</abbr></li>
+      <ol type = "a">
+        <li>The input data is all placed into the random access memory which serves as a temporary storage area for the CPU to deal with data more efficiently.</li>
+        <li>I/O-Mapped I/O: A block in the RAM is set aside for peripherals, and the mouse data is placed there when it has something to send to the CPU, more efficient than the alternative (Memory Mapped I/O)</li>
+      </ol>
+    <li style = "font-weight: bold;">CPU Socket</li>
+      <ol type = "a">
+        <li>This is the resting place for the CPU to be placed in, and contains the series of pins that connect it to the motherboard and allow data to be transmitted to the CPU.</li>
+      </ol>
+    <li style = "font-weight: bold;">CPU and RAM</li>
+      <ol type = "a">
+        <li>After receiving the interrupt signal, the first task is to pause the current task and handle the input.</li>
+        <li>The CPU might increase its clock rate if it needs to handle a high number of mouse and potentially keyboard inputs.</li>
+        <li>The Memory Management Unit determines that the data needs to be retrieved from RAM storage rather than <abbr title = "Read Only Memory">ROM</abbr>.</li>
+        <li>The Control Unit of the CPU fetches the data first and decodes the instruction into a command that can be easily processed. It uses electrical signals to direct the other parts to do so.</li>
+        <li>The ALU (Arithmetic Logic Unit) in the CPU receives this data and performs operations on it.</li>
+        <li>The results of these operations are stored in the CPU’s primary cache so they can be accessed quicker during subsequent operations (however, there aren’t many since it is a single mouse click).</li>
+        <li>The cycle repeats until all of the data is processed by the CPU.</li>
+        <li>CPU creates a signal to inform the network card while storing the packets that are to be transmitted in the RAM.</li>
+      </ol>
+    <li style = "font-weight: bold;">CPU Socket</li>
+      <ol type = "a">
+        <li>Data from the memory unit is transferred back to the CPU socket so it can be sent out from the CPU.</li>
+      </ol>
+    <li style = "font-weight: bold;">Northbridge/Southbridge</li>
+      <ol type = "a">
+        <li>The signal is transferred to the northbridge and back to the southbridge, which recognizes as it output to be sent to the <abbr title = "Peripheral Component Interconnect">PCI</abbr> slots via the PCI Bus.</li>
+      </ol>
+    <li style = "font-weight: bold;">PCI Slots</li>
+      <ol type = "a">
+        <li>The signal is received and transferred over to the slot which contains the network card.</li>
+      </ol>
+    <li style = "font-weight: bold;">Network Card</li>
+      <ol type = "a">
+        <li>The network card first retrieves and reads the packets that are stored in the RAM.</li>
+        <li>Network card uses its own CPU/RAM to calculate how to send the data.</li>
+        <li>The network card sends the data to the application’s server.</li>
+      </ol> 
+  </ol>  
+</body>
+</html>
