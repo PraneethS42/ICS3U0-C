@@ -26,9 +26,9 @@ console.log("Did the " + name + " have lunch? " + had_lunch + ".")
 
 
 // TASK CODE --------->
-let num1 = 11
-let num2 = 7
-let num3 = 10
+let num1 = parseInt(prompt("Enter the first number:"))
+let num2 = parseInt(prompt("Enter the second number:"))
+let num3 = parseInt(prompt("Enter the third number:"))
 
 let num_addition = num1 + num2
 let num_squaredifference = num1*num1 - num2*num2
