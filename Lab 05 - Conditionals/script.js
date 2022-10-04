@@ -32,3 +32,24 @@ if (grade < 0 || grade > 100) {
   else {
     console.log("Not Passing.")
   }
+
+let password = "AaronJudge9218"
+let choice = prompt("Do you wish to change your password? Type yes or no: ")
+
+if (choice == "Yes" || choice == "yes") {
+  let newpassword = prompt("Enter your new password")
+  password = newpassword
+}
+
+while (true) {
+  let input = prompt("Enter your password:")
+  if (password == input) {
+    console.log("You got the correct password!")
+    break
+  }
+  else {
+    console.log("Sorry, Try Again!")
+  }
+}
+  
+  
