@@ -39,8 +39,8 @@ console.log("Rounded average: " + Math.round(sum/amnt))
 
 // TASK 2 CODE STARTS HERE -->
 let a = parseInt(prompt("a ="));
-let b = parseInt(prompt("a ="));
-let c = parseInt(prompt("a ="));
+let b = parseInt(prompt("b ="));
+let c = parseInt(prompt("c ="));
 
 console.log("x1 = " + (-b + Math.sqrt(Math.abs(b*b - 4*a*c)))/(2*a))
 console.log("x2 = " + (-b - Math.sqrt(Math.abs(b*b - 4*a*c)))/(2*a))
