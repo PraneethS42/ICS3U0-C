@@ -12,12 +12,12 @@
 
 require('./index.js');
 
-//Code goes here
-
+// MAIN CODE STARTS HERE -->
 //inputting number
 let grade = parseInt(prompt("Enter your grade from 0-100"))
 
-if (grade < 0 || grade > 100) {
+// checking grades with conditional statements
+  if (grade < 0 || grade > 100) {
     console.log("Invalid Grade.")
   }
   else if (grade >= 80) {
@@ -32,15 +32,19 @@ if (grade < 0 || grade > 100) {
   else {
     console.log("Not Passing.")
   }
+// MAIN CODE STARTS HERE -->
 
+// Challenge Code
 let password = "AaronJudge9218"
 let choice = prompt("Do you wish to change your password? Type yes or no: ")
 
+// If password is requsted to be changed
 if (choice == "Yes" || choice == "yes") {
   let newpassword = prompt("Enter your new password")
   password = newpassword
 }
 
+// Loops until password is guessed
 while (true) {
   let input = prompt("Enter your password:")
   if (password == input) {

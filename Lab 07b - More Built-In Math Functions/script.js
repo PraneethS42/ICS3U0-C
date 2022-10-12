@@ -39,5 +39,6 @@ let a = parseInt(prompt("a ="));
 let b = parseInt(prompt("b ="));
 let c = parseInt(prompt("c ="));
 
+// Compute using quadratic formula
 console.log("x1 = " + (-b + Math.sqrt(Math.abs(b*b - 4*a*c)))/(2*a));
 console.log("x2 = " + (-b - Math.sqrt(Math.abs(b*b - 4*a*c)))/(2*a));

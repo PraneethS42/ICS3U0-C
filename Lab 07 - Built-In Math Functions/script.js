@@ -14,9 +14,9 @@ require('./lesson.js.js');
 
 //Code goes here
 
-
 // TASK 2 CODE STARTS HERE
 count = 0;
+// Loop code until sum of dice1 and 2 is equal to 3
 while (true) {
   count += 1;
   let die1 = Math.floor(Math.random()*6 + 1);
@@ -32,15 +32,18 @@ while (true) {
 
 // TASK 3 CODE STARTS HERE 
 let questionCount = 0;
+// Loop until they get a question wrong
 while (true) {
   let num1 = Math.floor(Math.random()*9 + 1);
   let num2 = Math.floor(Math.random()*9 + 1);
   let product = num1*num2;
+  // Computing and verifying answers
   let answer = parseInt(prompt(num1 + " x " + num2 + " = "));
   if (product == answer) {
     questionCount++;
   }
   else {
+    // Ending if correct
     console.log("oops!");
     console.log("You got " + questionCount + " questions correct!");
     break;
