@@ -1,0 +1,166 @@
+//This is required to get input from the user in the console.
+const readline = require('readline-sync');
+
+/*
+  Name:        Programming Assignment 1 - Seed Calculator
+  Purpose:     Help the user, who has joined a foundation to plant trees, plan out their mission and find out how much water they need
+
+  Author:      Praneeth Suryadevara
+  Created:     21-Oct-2022
+  Updated:     01-Nov-2022
+*/
+
+require('./index.js');
+
+
+/**
+ * @desc Calculates the growth of a tree seed depending on input parameters. The tree grows based on the inputted growth rate 
+ * 
+ * @param {number} days The number of days the experiment runs
+ * @param {number} growthRate The initial rate at which the tree grows daily
+ * @param {number} treeNumber The number of the tree in the experiment
+ * @returns {number} waterAmount The amount of water the tree needs to grow
+*/
+
+function treeGrowth(days, growthRate, treeNumber) {
+  
+  // base values of the tree - water is measured in mL
+  let treeSize = 1;
+  let waterAmount = 0;
+  let randomIncreaseRange = 0.06;  
+  // storing the growthRate value so it can be used in subsequent calculations
+  let originalGrowthRate = growthRate;
+
+  // iterating through all the days, increasing growth rate randomly every 2 days
+  for (let i = 1; i <= days; i++) {
+    if (i % 2 == 0) {
+      growthRate += Math.random() * randomIncreaseRange;
+    }
+    // Rounding variables
+    treeSize = Math.round((treeSize * growthRate) * 100) / 100;
+    growthRate = Math.round((growthRate)*100)/100;
+
+    // Calculating the water amount (twice the size of the tree)
+    waterAmount = Math.round((waterAmount + treeSize * 2)*100)/100;
+  }
+
+  // Calculate the average growth of a tree by assuming that every random function landed in the middle
+  let average = randomIncreaseRange/2;
+
+  // Checking how the tree grew in comparison to the average rate
+  if (growthRate < originalGrowthRate + Math.floor(days/2)*average)
+  {
+    console.log("\nTree number " + treeNumber + " grew slower than average.");
+  }
+  else if (growthRate > originalGrowthRate + Math.floor(days/2)*average){
+    console.log("\nTree number " + treeNumber + " grew faster than average!"); 
+  }
+  else {
+    console.log("\nTree number " + treeNumber + " grew at an average rate.");
+  }
+
+  // Outputting water amount and returning the value
+  console.log("Tree number " + treeNumber + " needs " + waterAmount + "mL, or " + Math.round(waterAmount*100/1000)/100 + "L of total water.");
+  return waterAmount;
+}
+
+
+/**
+ * @desc Extra function - Decreases redundancy of checking the bounds of variables every time
+ * 
+ * @param {number} value The value that needs to be checked 
+ * @param {number} floor The minimum value that can be allowed 
+ * @param {number} ceiling The maximum value that can be allowed 
+ * @returns {number} value The user value that has been confirmed to fit in bounds
+*/
+
+function checkValidity(value, floor, ceiling) {
+  while (true) {
+    if (value > floor && value <= ceiling) {return value;}
+    else {
+      console.log("Enter a valid number!");
+      value = parseInt(prompt(""))
+    }
+  }
+}
+
+
+/*
+ * MAIN CODE
+*/ 
+
+// Intro text
+console.log("Welcome to The Tree Foundation! Here, all our members are devoted to planting trees and recovering the Earth from climate change. We are happy to have you!\n");
+console.log("This is your current space for planting trees, your backyard:\n-----\n| . |\n-----\nYou have already planted one seed in here. Now, we need some information about your tree seed.\n");
+
+// PART 1 - Single Tree
+// Take inputs, using function to ensure it is in range 
+let days = parseInt(prompt("Enter the number of days (1-30) that you wish for your tree to grow."));
+days = Math.floor(checkValidity(days, 0, 30)); 
+
+let percentIncrease = parseInt(prompt("Enter a percentage between 5 and 20% that your tree grows every day."));
+// Covnvert the percentage into a rate
+let growthRate = (1 + (checkValidity(percentIncrease, 4, 20)) / 100);
+
+let waterAmount = parseInt(prompt("Enter how much water you have in mL"));
+waterAmount = checkValidity(waterAmount, 0, Number.MAX_VALUE);
+
+// Call function and store the amount of water needed in a variable; compare it to the amount of water the user has
+let requiredWaterAmount = treeGrowth(days, growthRate, 1);
+if (requiredWaterAmount <= waterAmount) {
+  console.log("\nYou have enough water! You have an excess of " + Math.round((waterAmount - requiredWaterAmount))/1000 + "L.")
+} 
+else {
+  console.log("\nYou do not have enough water! You would need " + Math.round((requiredWaterAmount-waterAmount))/1000 + "L more.")
+}
+
+
+// PART 2 - Garden
+console.log("\n--- " + days + " DAYS LATER ---")
+console.log("Now that you have grown your first tree successfully, it's time to make a garden.");
+
+// Input the number of trees the user would like in their garden
+let treeNumber = parseInt(prompt("Enter how many trees you would like (20 or less)"));
+treeNumber = Math.floor(checkValidity(treeNumber, 0, 20));
+
+// Printing out garden, accounting for situations where there is an odd number
+console.log("This is what your garden looks like: ");
+console.log("-" + "--".repeat(Math.ceil(treeNumber/2)) + "--");
+console.log("|" + " .".repeat(Math.ceil(treeNumber/2)) + " |");
+console.log("|" + " .".repeat(Math.floor(treeNumber - treeNumber/2)) + "  ".repeat(Math.ceil(treeNumber/2)-Math.floor(treeNumber - treeNumber/2))+ " |");
+console.log("-" + "--".repeat(Math.ceil(treeNumber/2)) + "--");
+
+// Taking inputs again (storing to old variables)
+days = parseInt(prompt("Enter the number of days (1-30) that you wish for your trees to grow."));
+days = Math.floor(checkValidity(days, 0, 30)); 
+percentIncrease = parseInt(prompt("Enter a percentage between 5 and 20% that your trees grow every day."));
+growthRate = (1 + (checkValidity(percentIncrease, 4, 20)) / 100);
+
+// Inputting user water amount
+waterAmount = parseInt(prompt("Enter how much water you have in mL"));
+waterAmount = checkValidity(waterAmount, 0, Number.MAX_VALUE);
+
+// Calculating the total amount of water needed
+let waterSum = 0;
+for (let i = 0; i < treeNumber; i++) 
+{
+  requiredWaterAmount = treeGrowth(days, growthRate, i+1);
+  waterSum += requiredWaterAmount;
+}
+
+// Comparing the total water needed to the amount of water the user needs
+if (waterSum <= waterAmount) {
+  console.log("\nYou have enough water! You have an excess of " + Math.round((waterAmount - waterSum))/1000 + "L.")
+} 
+else {
+  console.log("\nYou do not have enough water! You would need " + Math.round((waterSum-waterAmount))/1000 + "L more.")
+}
+
+// OUTRO
+console.log("\n--- " + days + " DAYS LATER ---");
+console.log("Thank you for contributing towards our project! We hope you continue to plant trees in the future!");
+
+
+
+
+
